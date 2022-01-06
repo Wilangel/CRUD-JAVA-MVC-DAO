@@ -18,7 +18,7 @@
     <body>
         <div>
             <h1>Listar Personas</h1>
-            <a href="Controlador?accion=add">Agregar Nuego</a>
+            <a href="Controlador?accion=add">Agregar Nuevo</a>
             <table border="1">
                 <thead>
                     <tr>
@@ -45,14 +45,16 @@
                         <td><%= per.getNom() %></td>
                         <td>
                             
-                            <a href="">Edit</a>
-                            <a href="">Remove</a>
+                            <a href="Controlador?accion=editar&id=<%= per.getId() %>">Edit</a>
+                            <a>Remove</a>
                             
                         </td>
                     </tr>
                     <%}%>
                 </tbody>
             </table>
+                
+                <a href="index.jsp">Regresar</a>
 
         </div>
     </body>

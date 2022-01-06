@@ -47,7 +47,21 @@ Persona p = new Persona();
 
     @Override
     public Persona List(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "select * from persona where id="+id;
+        
+        try {
+            con=cn.getConnection();
+            ps=con.prepareStatement(sql);
+            rs=ps.executeQuery();
+            while (rs.next()) {                
+                p.setId(rs.getInt("id"));
+                p.setDni(rs.getString("dni"));
+                p.setNom(rs.getString("nombre"));
+            }
+        } catch (Exception e) {
+        }
+        
+        return p;
     }
 
     @Override
@@ -66,7 +80,15 @@ Persona p = new Persona();
 
     @Override
     public boolean Edit(Persona per) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       String sql="update persona set dni='"+per.getDni()+"',nombre='"+per.getNom()+"'where Id="+per.getId();
+      
+        try {
+            con=cn.getConnection();
+            ps=con.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+        return false;
     }
 
     @Override

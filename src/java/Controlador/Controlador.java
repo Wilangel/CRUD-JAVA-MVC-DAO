@@ -20,12 +20,13 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class Controlador extends HttpServlet {
 
-    String Listar="vistas/listar.jsp";
-    String Add="vistas/add.jsp";
-    String Edit="vistas/listar.jsp";
-    Persona p= new Persona();
-    PersonaDAO  dao = new PersonaDAO();
-    
+    String Listar = "vistas/listar.jsp";
+    String Add = "vistas/add.jsp";
+    String Edit = "vistas/edit.jsp";
+    Persona p = new Persona();
+    PersonaDAO dao = new PersonaDAO();
+    int id;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -43,7 +44,7 @@ public class Controlador extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Controlador</title>");            
+            out.println("<title>Servlet Controlador</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet Controlador at " + request.getContextPath() + "</h1>");
@@ -64,22 +65,35 @@ public class Controlador extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String Acceso="";
-        String Action=request.getParameter("accion");
+        String Acceso = "";
+        String Action = request.getParameter("accion");
         if (Action.equalsIgnoreCase("listar")) {
             Acceso = Listar;
-            
-        }else if (Action.equalsIgnoreCase("add")) {
-            Acceso=Add;
-        }else if (Action.equalsIgnoreCase("Agregar")) {
-            String dni=request.getParameter("txtDni");
-            String nombre=request.getParameter("txtNombre");
+
+        } else if (Action.equalsIgnoreCase("add")) {
+            Acceso = Add;
+        } else if (Action.equalsIgnoreCase("Agregar")) {
+            String dni = request.getParameter("txtDni");
+            String nombre = request.getParameter("txtNombre");
             p.setDni(dni);
             p.setNom(nombre);
             dao.Add(p);
-            Acceso=Listar;
-            
+            Acceso = Listar;
+        } else if (Action.equalsIgnoreCase("editar")) {
+            request.setAttribute("idPer", request.getParameter("id"));
+            Acceso = Edit;
+        } else if (Action.equalsIgnoreCase("Actualizar")) {
+            id = Integer.parseInt(request.getParameter("txtId"));
+            String dni = request.getParameter("txtDni");
+            String nombre = request.getParameter("txtNombre");
+            p.setId(id);
+            p.setDni(dni);
+            p.setNom(nombre);
+            dao.Edit(p);
+            Acceso = Listar;
         }
+
+        // request despues del if
         RequestDispatcher vista = request.getRequestDispatcher(Acceso);
         vista.forward(request, response);
     }
