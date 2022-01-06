@@ -4,6 +4,8 @@
  */
 package Controlador;
 
+import Modelo.Persona;
+import ModeloDAO.PersonaDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -21,6 +23,8 @@ public class Controlador extends HttpServlet {
     String Listar="vistas/listar.jsp";
     String Add="vistas/add.jsp";
     String Edit="vistas/listar.jsp";
+    Persona p= new Persona();
+    PersonaDAO  dao = new PersonaDAO();
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -64,6 +68,16 @@ public class Controlador extends HttpServlet {
         String Action=request.getParameter("accion");
         if (Action.equalsIgnoreCase("listar")) {
             Acceso = Listar;
+            
+        }else if (Action.equalsIgnoreCase("add")) {
+            Acceso=Add;
+        }else if (Action.equalsIgnoreCase("Agregar")) {
+            String dni=request.getParameter("txtDni");
+            String nombre=request.getParameter("txtNombre");
+            p.setDni(dni);
+            p.setNom(nombre);
+            dao.Add(p);
+            Acceso=Listar;
             
         }
         RequestDispatcher vista = request.getRequestDispatcher(Acceso);

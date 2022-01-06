@@ -52,7 +52,16 @@ Persona p = new Persona();
 
     @Override
     public boolean Add(Persona per) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "insert into persona (dni, nombre)values('"+per.getDni()+"','"+per.getNom()+"')";
+        
+        try {
+            con=cn.getConnection();
+            ps=con.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+        
+        return false;
     }
 
     @Override

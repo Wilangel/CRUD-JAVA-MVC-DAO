@@ -18,7 +18,7 @@
     <body>
         <div>
             <h1>Listar Personas</h1>
-
+            <a href="Controlador?accion=add">Agregar Nuego</a>
             <table border="1">
                 <thead>
                     <tr>
