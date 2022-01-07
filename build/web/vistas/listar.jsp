@@ -46,7 +46,7 @@
                         <td>
                             
                             <a href="Controlador?accion=editar&id=<%= per.getId() %>">Edit</a>
-                            <a>Remove</a>
+                            <a href="Controlador?accion=eliminar&id=<%= per.getId() %>">Remove</a>
                             
                         </td>
                     </tr>

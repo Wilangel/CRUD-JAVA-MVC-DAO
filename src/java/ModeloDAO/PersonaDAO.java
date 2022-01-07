@@ -93,7 +93,15 @@ Persona p = new Persona();
 
     @Override
     public boolean Eliminar(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql= "delete from persona where id="+id;
+        try {
+            con=cn.getConnection();
+            ps=con.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+        
+        return false;
     }
     
     

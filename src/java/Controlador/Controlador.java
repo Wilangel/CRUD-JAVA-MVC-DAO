@@ -91,6 +91,11 @@ public class Controlador extends HttpServlet {
             p.setNom(nombre);
             dao.Edit(p);
             Acceso = Listar;
+        }else if(Action.equalsIgnoreCase("eliminar")){
+            id= Integer.parseInt(request.getParameter("id"));
+            p.setId(id);
+            dao.Eliminar(id);
+            Acceso=Listar;
         }
 
         // request despues del if
