@@ -11,28 +11,33 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <title>JSP Page</title>
     </head>
     <body>
-        <div>
-            <%
+        <div class="container">
+            <div class="col-lg-6">
+              <%
                 PersonaDAO dao = new PersonaDAO();
                 int id = Integer.parseInt((String) request.getAttribute("idPer"));
                 Persona p = (Persona) dao.List(id);
             %>
-            <h1>Modificar Persona</h1><!-- comment -->
+            <h1 class="text-center">Modificar Persona</h1><!-- comment -->
             <form action="Controlador">
                 DNI:<br>
-                <input type="text" name="txtDni" value="<%=p.getDni()%>"><br>
+                <input class="form-control" type="text" name="txtDni" value="<%=p.getDni()%>"><br>
                 NOMBRE:<br>
-                <input type="text" name="txtNombre" value="<%=p.getNom()%>"><br>
+                <input class="form-control" type="text" name="txtNombre" value="<%=p.getNom()%>"><br>
                 <input type="hidden" name="txtId" value="<%=p.getId()%>"><br>
 
-                <br> <input type="submit" name="accion" value="Actualizar"><br>
+                <br> <input class="btn btn-primary" type="submit" name="accion" value="Actualizar"><br>
 
                 <!-- link Regresar -->
-                <a href="Controlador?accion=Listar">Regresar</a>
-            </form>
+                <br> <a class="btn btn-primary" href="Controlador?accion=Listar">Regresar</a>
+            </form>  
+                
+            </div>
+            
 
         </div>
     </body>
